@@ -4,6 +4,7 @@ from rest_framework import status
 from rest_framework.permissions import IsAuthenticated
 from rest_framework.response import Response
 from rest_framework.authentication import TokenAuthentication
+from rest_framework import   filters
 from profiles_api import permissions
 from profiles_api import serializer 
 from django.shortcuts import get_object_or_404
@@ -108,3 +109,6 @@ class UserProfileViewSet(viewsets.ModelViewSet):
     serializer_class=serializer.UserProfileSerializer
     authentication_classes=(TokenAuthentication, )
     permission_classes=(permissions.UpdateOwnProfile,)
+
+    filter_backends=(filters.SearchFilter,)
+    search_fields=('name','email')
